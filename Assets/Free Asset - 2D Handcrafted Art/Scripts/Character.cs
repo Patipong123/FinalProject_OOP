@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public abstract class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour // Abstract Class
 {
+    public Image Healthbar;
 
+    // Encapsulation
     [SerializeField] protected float health;
+    [SerializeField] protected float maxHealth;
     [SerializeField] protected float speed;
     [SerializeField] protected float attackRange;
     [SerializeField] protected float attackDamage;
@@ -26,25 +30,21 @@ public abstract class Character : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(speed));
         
     }
-    
+    #region Abstact Method
+
+    //Abstact Method
     public abstract void Move(); 
     
     public abstract void Attack();
 
-    public void ApplyKnockback(Vector2 direction)
-    {
-        if (rb != null)
-        {
-            rb.velocity = Vector2.zero;
-            rb.AddForce(direction.normalized * knockbackForce, ForceMode2D.Impulse);
-        }
-    }
+    #endregion
 
-
+    #region Polymorphism
 
     public virtual void TakeDamage(float damage) 
     {
         health -= damage;
+        Healthbar.fillAmount = health / maxHealth;
         Debug.Log($"{gameObject.name} took {damage} damage. Remaining health: {health}");
         if (health <= 0)
         {
@@ -58,11 +58,21 @@ public abstract class Character : MonoBehaviour
         TakeDamage(damage);
     }
 
+    #endregion
+
     protected virtual void Die() 
     {
         Debug.Log($"{gameObject.name} has died.");
         Destroy(gameObject);
     }
 
-    
+    public void ApplyKnockback(Vector2 direction)
+    {
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
+            rb.AddForce(direction.normalized * knockbackForce, ForceMode2D.Impulse);
+        }
+    }
+
 }

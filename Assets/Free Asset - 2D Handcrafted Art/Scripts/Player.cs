@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Player : Character
+public class Player : Character // Inheritance
 {
     
     private bool isHurt = false;
@@ -12,6 +13,7 @@ public class Player : Character
     {
         
         health = 100f;
+        maxHealth = health;
         speed = 5f;
         attackRange = 2f;
         attackDamage = 20f;
@@ -47,6 +49,7 @@ public class Player : Character
         }
     }
 
+    
     public override void Move() 
     {
         float horizontal = Input.GetAxis("Horizontal"); 
@@ -65,6 +68,7 @@ public class Player : Character
         }
     }
 
+    
     public override void Attack()
     {
         if (!isAttacking)
@@ -103,6 +107,18 @@ public class Player : Character
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange); 
+    }
+
+    protected override void Die()
+    {
+        base.Die(); 
+        ReloadGame(); 
+    }
+
+    private void ReloadGame()
+    {
+        Scene currentScene = SceneManager.GetActiveScene(); 
+        SceneManager.LoadScene(currentScene.name); 
     }
 
 
