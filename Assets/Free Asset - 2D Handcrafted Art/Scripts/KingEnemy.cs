@@ -13,12 +13,8 @@ public class KingEnemy : Character // Inheritance
 
     private void Start()
     {
-        health = 100f;
-        maxHealth = health;
-        speed = 2f;
-        attackRange = 1.5f;
-        attackDamage = 10f;
-        knockbackForce = 500f;
+        
+        init(300f,health,2f,1.5f,10f,500f);
         Player = GameObject.FindWithTag("Player").transform;
 
         if (winUI != null)

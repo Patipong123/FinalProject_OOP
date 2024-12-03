@@ -30,6 +30,17 @@ public abstract class Character : MonoBehaviour // Abstract Class
         animator.SetFloat("Speed", Mathf.Abs(speed));
         
     }
+
+    public void init(float newHealth, float newMaxHealth, float newSpeed, float newAttackRange, float newAttackDamage, float newKnockbackForce) 
+    {
+        health = newHealth;
+        maxHealth = newHealth;
+        speed = newSpeed;
+        attackRange = newAttackRange;
+        attackDamage = newAttackDamage;
+        knockbackForce = newKnockbackForce;
+    }
+
     #region Abstact Method
 
     //Abstact Method

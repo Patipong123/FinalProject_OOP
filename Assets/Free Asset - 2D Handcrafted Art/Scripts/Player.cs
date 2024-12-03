@@ -11,13 +11,7 @@ public class Player : Character // Inheritance
 
     private void Start()
     {
-        
-        health = 100f;
-        maxHealth = health;
-        speed = 5f;
-        attackRange = 2f;
-        attackDamage = 20f;
-        knockbackForce = 10f;
+        init(100f,health,5f,2f,20f,10f);
     }
 
     private void Update()
